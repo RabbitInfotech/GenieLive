@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ginie.live/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ginie.live/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ginie.live/">
+      <s:element name="AskHelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="AskHelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AskHelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Email">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmailId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Appkey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AskHelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:AskHelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="AskHelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:AskHelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="EmailSoapIn">
+    <wsdl:part name="parameters" element="tns:Email" />
+  </wsdl:message>
+  <wsdl:message name="EmailSoapOut">
+    <wsdl:part name="parameters" element="tns:EmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="AskHelloWorldHttpGetIn" />
+  <wsdl:message name="AskHelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="EmailHttpGetIn">
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="Subject" type="s:string" />
+    <wsdl:part name="Message" type="s:string" />
+    <wsdl:part name="Sender" type="s:string" />
+    <wsdl:part name="Appkey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EmailHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AskHelloWorldHttpPostIn" />
+  <wsdl:message name="AskHelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="EmailHttpPostIn">
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="Subject" type="s:string" />
+    <wsdl:part name="Message" type="s:string" />
+    <wsdl:part name="Sender" type="s:string" />
+    <wsdl:part name="Appkey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EmailHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="MsgSoap">
+    <wsdl:operation name="AskHelloWorld">
+      <wsdl:input message="tns:AskHelloWorldSoapIn" />
+      <wsdl:output message="tns:AskHelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <wsdl:input message="tns:EmailSoapIn" />
+      <wsdl:output message="tns:EmailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MsgHttpGet">
+    <wsdl:operation name="AskHelloWorld">
+      <wsdl:input message="tns:AskHelloWorldHttpGetIn" />
+      <wsdl:output message="tns:AskHelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <wsdl:input message="tns:EmailHttpGetIn" />
+      <wsdl:output message="tns:EmailHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MsgHttpPost">
+    <wsdl:operation name="AskHelloWorld">
+      <wsdl:input message="tns:AskHelloWorldHttpPostIn" />
+      <wsdl:output message="tns:AskHelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <wsdl:input message="tns:EmailHttpPostIn" />
+      <wsdl:output message="tns:EmailHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MsgSoap" type="tns:MsgSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AskHelloWorld">
+      <soap:operation soapAction="http://ginie.live/AskHelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <soap:operation soapAction="http://ginie.live/Email" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MsgSoap12" type="tns:MsgSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AskHelloWorld">
+      <soap12:operation soapAction="http://ginie.live/AskHelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <soap12:operation soapAction="http://ginie.live/Email" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MsgHttpGet" type="tns:MsgHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="AskHelloWorld">
+      <http:operation location="/AskHelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <http:operation location="/Email" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MsgHttpPost" type="tns:MsgHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="AskHelloWorld">
+      <http:operation location="/AskHelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Email">
+      <http:operation location="/Email" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Msg">
+    <wsdl:port name="MsgSoap" binding="tns:MsgSoap">
+      <soap:address location="http://ginie.live/api/msg.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MsgSoap12" binding="tns:MsgSoap12">
+      <soap12:address location="http://ginie.live/api/msg.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MsgHttpGet" binding="tns:MsgHttpGet">
+      <http:address location="http://ginie.live/api/msg.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MsgHttpPost" binding="tns:MsgHttpPost">
+      <http:address location="http://ginie.live/api/msg.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
